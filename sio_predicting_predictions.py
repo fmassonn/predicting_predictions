@@ -26,7 +26,7 @@ method = 4
 #       Year   obs   [ALL,    DYN,    STAT,   HEUR,   MIX]
 data = [
         [2007, 4.27, [np.nan, np.nan, np.nan, np.nan, np.nan]],
-        [2008, 4.69, [4.3 ,   np.nan, 4.5,    4.1,    3.48  ]], # Value from Larry's file
+        [2008, 4.69, [4.3 ,   np.nan,  4.5,    4.1,    3.48  ]], # Value from Larry's file
         [2009, 5.26, [4.74,   4.75,   4.89,   4.67,   np.nan]], # Value from Larry's file
         [2010, 4.87, [4.9 ,   4.9,    4.9,    5.0,    np.nan]], # Value from Larry's file
         [2011, 4.56, [4.7 ,   4.55,   4.7,    4.8,    np.nan]], # From website (and so on)
@@ -47,6 +47,7 @@ preds = [d[2][method] for d in data]
 # Prediction of the next SIO
 
 fig, ax = plt.subplots(2, 2, figsize = (8, 8), dpi = 100)
+plt.suptitle(methname[method] + " contributions", fontsize = 30)
 
 ax1 = ax[0, 0]
 ax1.grid()
@@ -92,6 +93,7 @@ ax4.scatter(ssies[:-1], preds[1:], 50, marker = "s", alpha = 0.5, lw = 0.0, colo
 ax4.legend()
 
 fig.tight_layout()
+plt.subplots_adjust(top = 0.85)
 plt.savefig("./fig1_" + methname[method] + ".png")
 
 # Prediction of prediction
@@ -99,6 +101,11 @@ x = np.array(ssies[:-1])
 xnew = ssies[-1]
 
 y = np.array(preds[1:])
+
+# Exclude nans
+x = x[~np.isnan(y)]
+y = y[~np.isnan(y)]
+
 n = len(x)
 
 
