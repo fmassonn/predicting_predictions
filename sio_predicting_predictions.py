@@ -26,10 +26,10 @@ method = 4
 #       Year   obs   [ALL,    DYN,    STAT,   HEUR,   MIX]
 data = [
         [2007, 4.27, [np.nan, np.nan, np.nan, np.nan, np.nan]],
-        [2008, 4.69, [4.3 ,   np.nan,  4.5,    4.1,    3.48  ]], # Value from Larry's file
+        [2008, 4.69, [4.3 ,   np.nan,  4.5,    4.1,    3.48 ]], # Value from Larry's file
         [2009, 5.26, [4.74,   4.75,   4.89,   4.67,   np.nan]], # Value from Larry's file
         [2010, 4.87, [4.9 ,   4.9,    4.9,    5.0,    np.nan]], # Value from Larry's file
-        [2011, 4.56, [4.7 ,   4.55,   4.7,    4.8,    np.nan]], # From website (and so on)
+        [2011, 4.56, [4.7 ,   4.55,   4.7,    4.8,    np.nan]], 
         [2012, 3.57, [4.4 ,   4.8,    4.4,    4.5,    np.nan]],
         [2013, 5.21, [4.1 ,   4.35,   3.9,    4.1,    np.nan]],
         [2014, 5.22, [4.7 ,   4.65,   4.8,    4.4,    4.5   ]],
@@ -38,6 +38,7 @@ data = [
         [2017, 4.82, [4.43,   4.39,   4.69,   4.08,   4.1   ]],
         [2018, 4.79, [4.6 ,   4.78,   4.41,   4.31,   5.04  ]],
         [2019, 4.32, [4.40,   4.56,   4.4 ,   4.09,   np.nan]], # Based on Betsy's Excel sheet
+        [2020, np.nan, [4.33, 4.405,  4.26,   4.35,   np.nan]]
        ]
 
 years = [d[0] for d in data]
