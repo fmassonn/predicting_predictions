@@ -21,7 +21,7 @@ import calendar
 
 # Add SIO data (June submissions)
 methname = ["All",  "Dynamical", "Statistical", "Heuristic", "Mixed"]
-method = 4
+method = 0
 
 #       Year   obs   [ALL,    DYN,    STAT,   HEUR,   MIX]
 data = [
@@ -38,7 +38,7 @@ data = [
         [2017, 4.82, [4.43,   4.39,   4.69,   4.08,   4.1   ]],
         [2018, 4.79, [4.6 ,   4.78,   4.41,   4.31,   5.04  ]],
         [2019, 4.32, [4.40,   4.56,   4.4 ,   4.09,   np.nan]], # Based on Betsy's Excel sheet
-        [2020, np.nan, [4.33, 4.405,  4.26,   4.35,   np.nan]]
+        [2020, 3.92, [4.33, 4.405,  4.26,   4.35,   np.nan  ]],
        ]
 
 years = [d[0] for d in data]
@@ -124,6 +124,9 @@ xtil = x - xbar
 ytil = y - ybar
 
 ax.scatter(x, y, 50, marker = "s", color = "k", alpha = 0.5)
+for j in np.arange(len(x)):
+    ax.text(x[j], y[j], str(years[j])[:], color = "white", ha = "center", va = "center", fontsize = 3)
+    
 ax.plot((xnew, xnew), (-1e9, 1e9), color = "green", label = str(years[-1]))
 ax.set_xlabel("Observation at year $y$ [10$^6$ km$^2$]")
 ax.set_ylabel(methname[method] + " SIO Prediction at year $y + 1$ [10$^6$ km$^2$]")
@@ -157,7 +160,7 @@ ax.legend()
 ynew = ahat * xnew + bhat
 snew = np.sqrt(se2 * (1 + 1 / n + (xnew - xbar) ** 2 / np.sum(xtil ** 2)))
 
-ax.set_title("Prediction of 2020 " + methname[method] + " SIO median:\n" + str(np.round(ynew, 2)) + " +/- " \
+ax.set_title("Prediction of " + str(years[-1] + 1) + " June SIO median (" + methname[method].lower() + "):\n" + str(np.round(ynew, 2)) + " +/- " \
              + str(np.round(zs[-1] * snew, 2)) + " million km²")
 plt.tight_layout()
 plt.savefig("fig2_" + methname[method] + ".png")
