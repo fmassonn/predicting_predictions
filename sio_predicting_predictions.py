@@ -124,6 +124,9 @@ xtil = x - xbar
 ytil = y - ybar
 
 ax.scatter(x, y, 50, marker = "s", color = "k", alpha = 0.5)
+for j in np.arange(len(x)):
+    ax.text(x[j], y[j], str(years[j])[:], color = "white", ha = "center", va = "center", fontsize = 3)
+    
 ax.plot((xnew, xnew), (-1e9, 1e9), color = "green", label = str(years[-1]))
 ax.set_xlabel("Observation at year $y$ [10$^6$ km$^2$]")
 ax.set_ylabel(methname[method] + " SIO Prediction at year $y + 1$ [10$^6$ km$^2$]")
@@ -157,7 +160,7 @@ ax.legend()
 ynew = ahat * xnew + bhat
 snew = np.sqrt(se2 * (1 + 1 / n + (xnew - xbar) ** 2 / np.sum(xtil ** 2)))
 
-ax.set_title("Prediction of 2021 " + methname[method] + " SIO median:\n" + str(np.round(ynew, 2)) + " +/- " \
+ax.set_title("Prediction of " + str(years[-1] + 1) + " June SIO median (" + methname[method].lower() + "):\n" + str(np.round(ynew, 2)) + " +/- " \
              + str(np.round(zs[-1] * snew, 2)) + " million km²")
 plt.tight_layout()
 plt.savefig("fig2_" + methname[method] + ".png")

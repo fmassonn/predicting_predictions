@@ -8,7 +8,7 @@ Created on Wed Jun 24 16:10:16 2020
 import numpy as np
 import matplotlib.pyplot as plt
 
-np.random.seed(0)
+#np.random.seed(0)
 # Understanding the origin of correlation between previous year observed
 # and next year observed extent
 
@@ -69,8 +69,8 @@ for jMC in range(nMC):
 
     
     
-fig, ax = plt.subplots(1, 1, dpi = 150)
-ax.set_title("Distriution of " + str(nMC) + " lag-1 correlations between artificial observations\n \
+fig, ax = plt.subplots(1, 1, dpi = 50)
+ax.set_title("Distribution of " + str(nMC) + " lag-1 correlations between artificial observations\n \
              at year $y$ and statistical prediction (extrapolation) at year $y+1$,\n \
              for $y$ ranging from " + str(yearbo) + " to " + str(yeareo - 1))
 h = ax.hist(correlations, bins = np.arange(-1, 1, 0.1), color = "black", \
@@ -81,5 +81,28 @@ ax.set_ylabel("Count")
 ax.set_xlabel("Sample Pearson correlation")
 ax.set_ylim(0.0, 1.05 * np.max(h[0]))
 ax.set_axisbelow(True)
+fig.tight_layout()
 fig.savefig("./fig.png")
 fig.show()
+
+
+
+x = list()
+y = list()
+for jMC in range(nMC):
+    tmp = np.random.randn(N)
+    x.append(tmp[-1])
+    y.append(np.polyval(np.polyfit(np.arange(1, N + 1), tmp, 1), N + 1))
+
+
+print(np.corrcoef(x, y)[0, 1])
+
+t = np.arange(1, N + 1); 
+tnp1t = N + 1 - np.mean(t); 
+k = N; 
+tkt = k - np.mean(t); 
+sti2 = np.sum((t - np.mean(t)) ** 2); 
+tnp1t = N + 1 - np.mean(t); 
+tnp1t2 = tnp1t ** 2; 
+r = (tnp1t * tkt / sti2 + 1 / N) / (tnp1t2 / sti2 + 1 / N) ** 0.5
+print(r)
