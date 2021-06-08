@@ -21,7 +21,7 @@ import calendar
 
 # Add SIO data (June submissions)
 methname = ["All",  "Dynamical", "Statistical", "Heuristic", "Mixed"]
-method = 4
+method = 0
 
 #       Year   obs   [ALL,    DYN,    STAT,   HEUR,   MIX]
 data = [
@@ -37,10 +37,10 @@ data = [
         [2016, 4.53, [4.28,   4.58,   4.28,   4.0,    np.nan]],
         [2017, 4.82, [4.43,   4.39,   4.69,   4.08,   4.1   ]],
         [2018, 4.79, [4.6 ,   4.78,   4.41,   4.31,   5.04  ]],
-        [2019, 4.32, [4.40,   4.56,   4.4 ,   4.09,   np.nan]], # Based on Betsy's Excel sheet
-        [2020, np.nan, [4.33, 4.405,  4.26,   4.35,   np.nan]]
+        [2019, 4.36, [4.40,   4.56,   4.4 ,   4.09,   np.nan]], # Based on Betsy's Excel sheet
+        [2020, 4.00, [4.33, 4.405,  4.26,   4.35,   np.nan  ]],
+        #[2021, np.nan,[np.nan, np.nan, np.nan, np.nan, np.nan]] 
        ]
-
 years = [d[0] for d in data]
 ssies = [d[1] for d in data]
 preds = [d[2][method] for d in data] 
@@ -58,7 +58,7 @@ ax1.set_title("September Arctic sea ice extent")
 ax1.plot(years, ssies, marker = "s", color = [0.5, 0.5, 0.5], label = "Observed (NSIDC G02135)")
 ax1.plot(years, preds, marker = "s", color = [1.0, 0.5, 0.0], label = "Predicted (" + methname[method] + " SIO median)")
 ax1.set_xlim(years[0] - 0.5, years[-1] + 0.5)
-ax1.legend(loc = "bottom")
+ax1.legend(loc = "lower right")
 
 ax2 = ax[0, 1]
 ax2.grid()
@@ -79,7 +79,7 @@ ax3.set_title("September Arctic sea ice extent")
 ax3.plot(years[1:], ssies[:-1], marker = "s", color = [0.5, 0.5, 0.5], label = "Observed last year (NSIDC G02135)")
 ax3.plot(years, preds, marker = "s", color = [1.0, 0.5, 0.0], label = "Predicted (" + methname[method] + " SIO median)")
 ax3.set_xlim(years[0] - 0.5, years[-1] + 0.5)
-ax3.legend(loc = "bottom")
+ax3.legend(loc = "lower right")
 
 
 ax4 = ax[1, 1]
@@ -157,7 +157,7 @@ ax.legend()
 ynew = ahat * xnew + bhat
 snew = np.sqrt(se2 * (1 + 1 / n + (xnew - xbar) ** 2 / np.sum(xtil ** 2)))
 
-ax.set_title("Prediction of 2020 " + methname[method] + " SIO median:\n" + str(np.round(ynew, 2)) + " +/- " \
+ax.set_title("Prediction of 2021 " + methname[method] + " SIO median:\n" + str(np.round(ynew, 2)) + " +/- " \
              + str(np.round(zs[-1] * snew, 2)) + " million km²")
 plt.tight_layout()
 plt.savefig("fig2_" + methname[method] + ".png")
