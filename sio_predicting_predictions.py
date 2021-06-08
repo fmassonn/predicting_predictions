@@ -21,7 +21,7 @@ import calendar
 
 # Add SIO data (June submissions)
 methname = ["All",  "Dynamical", "Statistical", "Heuristic", "Mixed"]
-method = 0
+method = 2
 
 #       Year   obs   [ALL,    DYN,    STAT,   HEUR,   MIX]
 data = [
