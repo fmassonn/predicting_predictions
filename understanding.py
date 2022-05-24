@@ -10,21 +10,23 @@ import matplotlib.pyplot as plt
 
 #np.random.seed(0)
 # Understanding the origin of correlation between previous year observed
-# and next year observed extent
+# and next year forecasted extent
 
 # Strategy: 1/ generate a synthetic time series of length N
-#           2/ Extrapolate the time series linearly or quadratically to N+ 1
+#           2/ Extrapolate the time series linearly or quadratically to N + 1
 #           3/ Correlate the extrapolation with the Nth element of the series
 #           4/ Repeat many times
 
 # Order for trend extrapolation
-order = 1 
+order = 0 
 
+# First year of time series
 yearb  = 1979
+
 # First year an outlook was collected
 yearbo = 2008 
 # Last year an outlook was collected
-yeareo = 2020 
+yeareo = 2022
 
 # Number of years
 N = yeareo - yearb + 1
@@ -69,9 +71,9 @@ for jMC in range(nMC):
 
     
     
-fig, ax = plt.subplots(1, 1, dpi = 50)
-ax.set_title("Distribution of " + str(nMC) + " lag-1 correlations between artificial observations\n \
-             at year $y$ and statistical prediction (extrapolation) at year $y+1$,\n \
+fig, ax = plt.subplots(1, 1, dpi = 150, figsize = (6, 4))
+ax.set_title("Distribution of " + str(nMC) + " correlations between artificial observations\n \
+             at year $y$ and linear extrapolation to year $y+1$,\n \
              for $y$ ranging from " + str(yearbo) + " to " + str(yeareo - 1))
 h = ax.hist(correlations, bins = np.arange(-1, 1, 0.1), color = "black", \
             alpha = 0.5, edgecolor = "white")
@@ -83,7 +85,6 @@ ax.set_ylim(0.0, 1.05 * np.max(h[0]))
 ax.set_axisbelow(True)
 fig.tight_layout()
 fig.savefig("./fig.png")
-fig.show()
 
 
 
