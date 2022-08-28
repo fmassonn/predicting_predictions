@@ -14,7 +14,7 @@ from   netCDF4 import Dataset
 import numpy as np
 from datetime import date
 import matplotlib.pyplot as plt
-import wget
+#import wget
 import os
 import csv
 import scipy.stats
@@ -22,7 +22,7 @@ import calendar
 
 # Add SIO data (June submissions)
 methname = ["All",  "Dynamical", "Statistical", "Heuristic", "Mixed"]
-method = 2
+method = 3
 
 #       Year   obs   mode, [ALL,    DYN,    STAT,   HEUR,   MIX]
 #
@@ -45,7 +45,7 @@ data = [
         [2019, 4.36, "inSample",   [4.40,   4.56,   4.4 ,   4.09,   np.nan]], # Based on Betsy's Excel sheet
         [2020, 4.00, "inSample",   [4.33,  4.405,  4.26,   4.35,   np.nan  ]], #
         [2021, 4.92, "inSample",   [4.37,   4.20,    4.46,  4.29,   np.nan ]],
-        #[2022, np.nan, "outSample",   [np.nan,   np.nan,    np.nan,  np.nan,   np.nan ]],
+        [2022, np.nan, "inSample",  [4.57,   4.56, 4.64,  4.38,   4.85 ]],
        ]
 
 # Collect data to contruct relationship
@@ -77,7 +77,7 @@ ax2.set_xlabel("Observation at year $y$ [10$^6$ km$^2$]")
 ax2.set_xlim(3.5, 5.5)
 ax2.set_ylim(3.5, 5.5)
 ax2.plot((0.0, 10.0), (0.0, 10.0), color = "grey", lw = 0.5, label = "y=x")
-ax2.set_title("Correspondence") 
+ax2.set_title("Correspondence: r = " + str(np.corrcoef(ssies[1:], preds[1:])[0, 1])) 
 ax2.scatter(ssies, preds, 50, marker = "s", alpha = 0.5, lw = 0.0, color = [0.0, 0.0, 0.5])
 ax2.legend()
 
@@ -213,7 +213,7 @@ fig, ax = plt.subplots(1,1, dpi = 150)
 ax.scatter(sept[:-1],june[1:])
 
 
-fig.close()
+plt.close(fig)
 
 
 
