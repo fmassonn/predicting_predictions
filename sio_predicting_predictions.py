@@ -45,7 +45,7 @@ data = [
         [2019, 4.36, "inSample",   [4.40,   4.56,   4.4 ,   4.09,   np.nan]], # Based on Betsy's Excel sheet
         [2020, 4.00, "inSample",   [4.33,  4.405,  4.26,   4.35,   np.nan  ]], #
         [2021, 4.92, "inSample",   [4.37,   4.20,    4.46,  4.29,   np.nan ]],
-        [2022, np.nan, "inSample",  [4.57,   4.56, 4.64,  4.38,   4.85 ]],
+        [2022, np.nan, "outSample",  [4.57,   4.56, 4.64,  4.38,   4.85 ]],
        ]
 
 # Collect data to contruct relationship
